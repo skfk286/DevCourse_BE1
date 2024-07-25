@@ -12,10 +12,10 @@
 * day_0723 (화)
 
 * day_0724 (수)
-  > Java의 Collection 들의 활용법
-  > /ws 패키지 실습 - Collection 을 사용하여 도서 관리 시스템 구현(BookManagerImpl 구현이 핵심, BookTest main 이 동작될 수 있도록..)
+  - Java의 Collection 들의 활용법
+  - /ws 패키지 실습 - Collection 을 사용하여 도서 관리 시스템 구현(BookManagerImpl 구현이 핵심, BookTest main 이 동작될 수 있도록..)
 
 * day_0725 (목)
-  > 1차, 2차원 배열의 구조 파악
-  > Sort 정렬 방법 여러개(implement, 무명 클래스, 람다식)
-  > ㅇ
+  - 1차, 2차원 배열의 구조 파악
+  - Sort 정렬 방법 여러개(implement, 무명 클래스, 람다식)
+  - 스트림
