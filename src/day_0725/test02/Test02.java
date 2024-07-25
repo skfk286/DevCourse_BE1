@@ -1,8 +1,9 @@
-package day_0725;
+package day_0725.test02;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
-public class Test01 {
+public class Test02 {
     public static void main(String[] args) {
         Student[] students = new Student[3];
 
@@ -10,11 +11,29 @@ public class Test01 {
         students[1] = new Student("이준호", 22, 85);
         students[2] = new Student("양유진", 20, 100);
 
-        Arrays.sort(students);
+        // Arrays.sort(students, new NameComparator());
+        Arrays.sort(students, new AgeComparator());
 
         for (int i = 0; i < students.length; i++) {
             System.out.println(students[i]);
         }
+    }
+}
+
+class AgeComparator implements Comparator<Student> {
+
+    @Override
+    public int compare(Student o1, Student o2) {
+        System.out.println("나이 비교중..");
+        return o2.getAge() - o1.getAge();
+    }
+}
+
+class NameComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student o1, Student o2) {
+        System.out.println("이름 비교중..");
+        return o1.getName().compareTo(o2.getName());
     }
 }
 
@@ -31,6 +50,22 @@ class Student implements Comparable<Student>{
        this.age = age;
        this.score = score;
    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     @Override
     public int compareTo(Student o) {
