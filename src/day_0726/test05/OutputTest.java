@@ -1,11 +1,10 @@
 package day_0726.test05;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class OutputStream {
+public class OutputTest {
     public static void main(String[] args) throws IOException {
         Student s = new Student("그렙", 20);
         // 객체를 Stream 으로 보낼때에는 '직렬화'(Serializable) 라는 개념이 필요.
