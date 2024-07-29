@@ -1,0 +1,39 @@
+# select 조회 시에 * 사용 비추천
+
+1. 데이터 조회 SELECT 형식
+
+    select [distinct] * 또는 칼럼1, 칼럼2, ... from 테이블명
+    [where 레코드 단위의 조건]
+    [group by 그룹을 묶을 기준 컬럼]
+    [having 그룹으로 묶은 상태에서의 조건]
+    [order by 컬럼명]
+      - distinct : 조회 결과에서 레코드 중복있으면 제거하고 한번만.
+      - where : 각 레코드 하나하나 놓고 내가 원하는 조건에 true 인 레코드만 걸러서 조회.
+      - group by : 해당 컬럼의 값이 같은 레코드가 하나의 그룹으로 묶어서 집계함수 등을 적용 가능.
+      - having : where 조건이 group by 보다 먼저 체크됨. group 으로 묶이고 나서 적용해야 한은 조건은 having 으로 거르기.
+      - order by : 해당 컬럼으로 asc 오름차순, desc 내림차순 정렬해줌. 컬럼1, 컬럼2 순서대로 우선순위가 적용됨.
+
+    Mysql Visual 하게 실행해보기 : 쿼리 동작을 시각화
+
+[tip] desc emp; 명령어 : 해당 테이블의 제약조건을 알 수 있음.
+
+2. insert ~ into
+    - values에서 모든 칼럼의 값을 나열하면 insert into 테이블 (칼럼1, 칼럼2, ... ) values(값1, 값2, ...)
+    에서 칼럼 나열 생략 가능
+    - values뒤에 여러 레코드 나열해서 한꺼번에 삽입 가능
+    - 서브쿼리 활용해서 다른 테이블의 select 결과를 통으로 insert 가능.
+
+3. delete from
+    - where 조건 잘 주는게 중요!!
+
+4. update set
+    - where 조건 잘 주는게 중요!!
+
+5. join
+아래의 inner 가 적힌 부분에 INNER, LEFT, RIGHT, CROS 대체 가능
+[inner join 의 문법]
+      SELECT A.*, B.*
+        FROM raw_data.table1 A
+ INNSER JOIN raw_data.tab;e2 B
+          ON A.key1 = B.key2 and A.key2 = B.key2
+       WHERE A.ts >= '2019-01-01'
