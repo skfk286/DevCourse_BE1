@@ -1,0 +1,144 @@
+* 개념적 데이터베이스 모델링
+개체, 엔티티
+
+* 논리적 데이터베이스 모델링
+기본키(Primary Key)
+후보키 중에서 선택한 주 키
+널(Null)의 값을 가질 수 없다(Not Null).
+동일한 값이 중복해서 저장될 수 없다(Unique).
+
+* 참조키, 이웃키(Foreign Key)
+관계를 맺는 두 엔티티에서 서로 참조하는 릴레이션의 attribute로 지정되는 키
+
+* Mapping Rule
+개념적 데이터베이스 모델리에서 도출된 개체 타입과 관계 타입의 테이블 정의.
+    단순 엔티티 -> 테이블
+    속성 -> 컬럼
+    식별자 -> 기본키
+    관계 -> 참조키, 테이블
+
+정규화
+제 1 정규화 : 중복을 없앤다.
+제 2 정규화 : 종속 관계에 필수 종속이 아닌 경우
+제 3 정규화
+제 4 정규화
+제 5 정규화
+
+* 물리적 데이터베이스 모델링
+
+------ Query 실습 : day_0729 의 EMP Query.sql 을 대상으로 테스트 진행 ------
+
+* join query
+---- 기본적인 join 쿼리의 사용, 다만 where 에 조건을 거는 건 비추천(필요에 따라..)
+    select * from emp join dept
+    on emp.deptno = dept.deptno
+    where sal > 1000;
+
+    select emp.ename, emp.empno, dept.dname from emp join dept
+    on emp.deptno = dept.deptno
+    where sal > 1000;
+
+    select e.name, e.empno, d.dname
+    from emp a join dept d
+    on e.deptno = d.deptno
+    where sal > 1000;
+-----------------------------------
+
+--조인하려는 양쪽 테이블에 동일한 이름의 컬럼이 있고, 그 컬럼값 기준으로 같은거 조인할 때 alter
+    select e.ename, e.empno, d.dname
+    from emp e join dept d
+    using(deptno);
+
+-- 컬럼명을 기재하는 것조차 귀찮아. 양쪽 테이블에 컬럼명 같은게 한싸잉어야 되겠지.. 제한적 사용
+    select e.ename, e.empno, d.dname
+    from enum e natural join dept.d;
+
+-- emp 테이블에 mgr 컬럼에 상사 직원번호가 있더라, 그 상사가 누군지 조회
+    select e.ename, e.empno, e.mgr, m.enme
+    from emp e join emp m
+    on e.mgr = m.empno;
+
+-- left join
+    select e.ename, e.empno, e.mgr, m.enme
+    from emp e left join emp m
+    on e.mgr = m.empno;
+
+* 서브 쿼리
+                ┌ where 절
+    (Select ~)  ├ from 절
+                └ select 절
+
+* 서브 쿼리 (where)
+    -- 평균 급여보다 많은 급여를 받는 직원 조회
+        select avg(sal) from emp; -- sub query
+
+        select * from emp
+        where sal > (select avg(sal) from emp);
+
+    -- 만약 서브쿼리의 실행 결과가 값 1개가 아니라 여러개의 행으로 나왔다면?
+        select avg(sal) from emp group by deptno;
+
+    -- 결과 행이 3개여서 쿼리 에러가 발생한다!
+        select * from emp
+        where sal > (select avg(sal) from emp group by deptno);
+
+    -- 서브 쿼리 결과가 다중행이라서 그중에 하나라도 일치
+    , 또는 하나라도 더 작은(큰) any
+        select * from emp
+        where sal > any (select avg(sal) from emp group by deptno);
+    , 또는 전체 통들어 보다 작은(큰) all
+        select * from emp
+        where sal > all (select avg(sal) from emp group by deptno);
+
+    -- in은 서브쿼리 실행 결과가 어려행일 때 그중 하나라도 일치하는게 있으면
+        select distinct mgr from emp where mgr is not null; -- 일단 누군가의 상사들을 모아서 봤더니 6명의 번호가 나온다.
+
+        select ename, empno from emp
+        where empno in (select distinct mgr from emp where mgr is not null);
+
+    -- ALLEN이 SALESMAN이고 30번 부서 소속이였음. 그런 애들 찾아내기.
+        select * from emp
+        where (job, deptno) in (select job, deptno from emp where ename='ALLEN');
+        또는 where (job, deptno) = (select job, deptno from emp where ename='ALLEN');
+
+* 서브 쿼리 (select) 활용
+    -- select ~~ from (이 자리에 서브쿼리 오는 경우, 원래 테이블 이름 와야하는 자리) : 인라인뷰
+        select * from emp where deptno=20;
+    -- 20번 부서 사람중 커미션 받는 사람 연봉 얼마? where dept=20 and comm is not null 이렇게 조건 줘도 되지만.
+    -- 서브 쿼리를 써보자면,
+        select ename, sal*12+comm from emp;
+        select ename, sal*12+comm
+        from (select * from emp where deptno=20) (여기 이자리에! alias 필수)
+        where sal is not null;
+    --- 이렇게 from에 사용되는 테이블인 척하는 서브쿼리는 alias 필수로 붙여줘야됨.
+        select ename, sal*12+comm
+        from (select * from emp where deptno=20) tmp
+        where comm is not null;
+
+    -- 20번 부서인 얘들 이름, 사번, 급여, 부서이름 조회
+        select empno, ename, sal, emp.deptno, dname
+        from emp join dept
+        on emp.deptno = dept.deptno
+        where dept.deptno=20;
+
+        select * from
+        (select empno, ename, sal, emp.deptno, dname
+         from emp join dept
+         on emp.deptno = dept.deptno
+         where dept.deptno=20) tmp -- 20번 부서 소속 애들만 대상으로 조회한 다음
+        where
+        tmp.sal > (select avg(sal) from emp); -- 전체 급여 평균보다 많이 받는 직원 조회
+
+    -- select (이자리에 서브쿼리, 원래이름 오는 자리임.) from ~~ : scalar subqury 라고 부름
+    -- create, insert, update, delete 에 서브쿼리 활용되는 경우.
+        drop table if exsists emp_blank;
+        create table emp_blank
+        select * from emp; -- select 서브 쿼리 결과로 그대로 테이블을 만들고 데이터까지 복사.
+
+        create table emp_blank
+        select * from emp where 1=0; -- select 결과에 레코드는 없어서 테이블 구조만 복사
+
+        insert into emp_blank
+        select * from emp where deptno=20; -- 20번 부서인 애들만 골라서 insert
+
+    -- update 나 delet 도 위의 select 와 비슷하게 사용된다.
