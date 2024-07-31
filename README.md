@@ -52,3 +52,4 @@
 * day_0731 (수)
   - JDBC 구조 파악
   - JDBC 테스트 실습(Prepared Statement, Statement)
+  - 테이블 간단하게 직접 설계하여 구현(10팀 - 식재료, 요리 테이블 실습!)

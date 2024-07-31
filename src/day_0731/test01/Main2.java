@@ -37,7 +37,7 @@ public class Main2 {
                 String writer = rs.getString("writer");
                 int price = rs.getInt("price");
                 String publisher = rs.getString("publisher");
-                System.out.println("bno = " + bno + ", title = " + title + ", writer = " + writer + ", price = " + price);
+                System.out.println("bno = " + bno + ", title = " + title + ", writer = " + writer + ", price = " + price + ", publisher = " + publisher);
             }
             // 5. 결과값 처리
             System.out.println("SQL 실행이 완료되었습니다. ");
