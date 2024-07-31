@@ -1,0 +1,16 @@
+jDBC 원리!
+
+DEvCourse_BE1/images/image.png 참고
+
+[JDBC 수행 순서]
+1. Java 와 DB의 Connection 연결
+2. SQL 운반자 준비
+3. Statement 객체를 이용한 할당
+4. 쿼리 DDL 별 반환 타입 설정
+   - insert, update, delete : int 타입 반환
+   - select : ResultSet
+5. DB 로부터 실행된 쿼리 결과 반환
+6. 결과 처리
+7. 리소스 반환
+
+.. https://dev.mysql.com/downloads/connector/j/ : Mysql Driver 다운

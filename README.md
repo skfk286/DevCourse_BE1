@@ -48,3 +48,7 @@
   - 테이블 설계, 정규화 등
   - JOIN 쿼리 사용 예시
   - 서브쿼리 사용 예시
+
+* day_0731 (수)
+  - JDBC 구조 파악
+  - JDBC 테스트 실습(Prepared Statement, Statement)
