@@ -10,7 +10,8 @@ public class Main {
         ResultSet rs = null;
         try {
             // 1. 커넥션 생성
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/workshop", "root", "1234");
+            // conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/workshop", "root", "1234");
+            conn = DriverManager.getConnection("jdbc:mysql://59.27.84.200:3306/workshop", "grepp", "grepp");
             /**
              * Driver 추가 필요.
              * File -> Project Structure... -> + 버튼 을 통해 라이브러리 타겟 추가
@@ -23,7 +24,7 @@ public class Main {
              */
 
             // 2. SQL 작성
-            SQL = "insert into book_tb(title, writer, price, publisher) values('mysql easy', 'ycjung', 30000, 'grepp')";
+            SQL = "insert into book_tb(title, writer, price, publisher) values('wwww', 'ycjung', 30000, 'grepp')";
             // 3. PreparedStatement or Statement 에 명령어 담기
             pstmt = conn.prepareStatement(SQL); // Statement는 이렇게 미리 SQL을 넣지 않고 execute 하는 시점에 넣는 차이가 있음.
             // 4. 실행하기
