@@ -54,7 +54,11 @@
   - JDBC 테스트 실습(Prepared Statement, Statement)
   - 테이블 간단하게 직접 설계하여 구현(10팀 - 식재료, 요리 테이블 실습!)
 
-*day_0701 (목)
+* day_0801 (목)
   - 모델 및 Repository 설계
   - 분리 인터페이스(Separated Interface) 패턴 설계
   - 간단한 게시판 테이블에 CRUD 기능을 JDBC 분리 패턴 설계로 구현
+
+* day_0802 (금)
+  - Mysql 의 제약 조건(foreign key)
+  - View 와 Index 개념 정리
