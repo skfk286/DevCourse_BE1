@@ -62,3 +62,4 @@
 * day_0802 (금)
   - Mysql 의 제약 조건(foreign key)
   - View 와 Index 개념 정리
+  - 백준 그래프 알고리즘 문제 풀이 및 정리
