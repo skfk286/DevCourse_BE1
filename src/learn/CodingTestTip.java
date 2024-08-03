@@ -47,7 +47,7 @@ public class CodingTestTip {
         Integer int2 = 123;
 
         Integer[] iarr = new Integer[5];
-        Integer a =  new 111;
+        Integer a =  111;
         System.out.println(Arrays.toString(iarr));
     }
 }
