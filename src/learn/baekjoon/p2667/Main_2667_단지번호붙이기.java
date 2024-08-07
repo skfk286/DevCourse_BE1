@@ -1,4 +1,4 @@
-package baekjoon.p2667;
+package learn.baekjoon.p2667;
 
 import java.io.BufferedReader;
 import java.io.IOException;

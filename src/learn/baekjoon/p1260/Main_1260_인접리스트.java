@@ -1,4 +1,4 @@
-package baekjoon.p1260;
+package learn.baekjoon.p1260;
 
 import java.util.*;
 
