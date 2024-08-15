@@ -1,10 +1,10 @@
-package learn;
+package coding_tip;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class CodingTestTip {
+public class ArraysTip {
     public static void main(String[] args) {
         Integer[] arr1 = {10, 8, 11, 2, 3, 0};
         String[] arr2 = {"a", "b", "c", "d", "e", "f", "g", "h"};

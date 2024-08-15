@@ -3,7 +3,6 @@ package learn.baekjoon.p4963;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 /**
  * 섬의 개수
@@ -18,18 +17,20 @@ public class Main_4963_섬의개수 {
 
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-        String str = "";
         String tmp = "";
         while((tmp = bf.readLine())!= null){
             int n = Integer.parseInt(tmp.split(" ")[0]);
             int m = Integer.parseInt(tmp.split(" ")[1]);
-            System.out.println("n: + " +n + ", m: " + m);
+
+            if(n == 0 && m == 0) // 0 0 입력시 종료
+                break;
+
             int[][] map = new int[m][n];
             visit = new boolean[m][n];
+            int land = 0;
 
             int i = 0;
             while((tmp = bf.readLine())!= null){
-
                 String[] tmpSplit = tmp.split(" ");
                 for(int j = 0; j < tmpSplit.length; j++) {
                     map[i][j] = Integer.parseInt(tmpSplit[j]);
@@ -39,43 +40,31 @@ public class Main_4963_섬의개수 {
                 if(m == i) break;
             }
 
-            /**
-             * 이 위치에서 갯수를 카운트 하고 출력하면 된다.
-             */
             for(int row = 0; row < m ; row++) {
                 for(int col = 0; col < n; col++) {
+                    if(map[row][col] == 1 && !visit[row][col]) {
+                        land++;
 
+                        searchLandCount(map, row, col);
+                    }
                 }
             }
 
-            System.out.println(searchLandCount(map));
-
-            System.out.println("---------------------");
-            System.out.println(Arrays.deepToString(map));
-            System.out.println("---------------------");
+            System.out.println(land);
         }
     }
 
-    public static int searchLandCount(int[][] map, int nowi, int nowj) {
-        int answer = 0;
+    public static void searchLandCount(int[][] map, int nowi, int nowj) {
+        visit[nowi][nowj] = true;
 
-        int land = 0;
         for(int i = 0; i < 8; i++) {
             int nexti = nowi + di[i];
             int nextj = nowj + dj[i];
 
-            if(map[nowi][nowj] == 1 && !visit[nowi][nowj]) {
-                visit[nowi][nowj] = true;
-                land++;
-
+            if(nexti >= 0 && nexti < map.length && nextj >= 0 && nextj < map[0].length &&
+                    map[nexti][nextj] == 1 && !visit[nexti][nextj]) {
                 searchLandCount(map, nexti, nextj);
-
             }
         }
-
-        if(land > 0)
-            answer++;
-
-        return answer;
     }
 }
