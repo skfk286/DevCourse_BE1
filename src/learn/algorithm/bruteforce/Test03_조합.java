@@ -1,4 +1,4 @@
-package day_0725.algorithm_bruteforce;
+package learn.algorithm.bruteforce;
 
 import java.util.Arrays;
 
