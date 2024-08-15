@@ -1,12 +1,10 @@
-package learn.baekjoon.p1260;
+package learn.baekjoon;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
-public class Main_1260_인접행렬 {
+public class Main_1260_인접리스트_answer {
     static int N, M, V; //정점갯수, 간선갯수, 시작정점
-    static boolean[][] adj; // 정점간의 인접 여부
+    static LinkedList<Integer>[] adjList; // 인접리스트
     static boolean[] visit; // 정점의 재방문 방지하기 위한 방문체크
     static StringBuilder sb; // DFS 탐색시 재귀 함수에서 방문처리 해야해서 스트링 이어붙일 때 메소드 밖에 있어야 편할수 있음.
 
@@ -17,15 +15,23 @@ public class Main_1260_인접행렬 {
         M = sc.nextInt();
         V = sc.nextInt();
 
-        adj = new boolean[N+1][N+1]; // 정점 번호가 1~N까지 사용
+        adjList = new LinkedList[N + 1]; // 링크드 리스트가 모든 정점마다 각각 가지도록!
+
+        for(int i=1; i<=N; i++){
+            adjList[i] = new LinkedList<>(); // 모든 정점들이 일단 비어있는 리스트 객체를 하나씩 가지도록
+        }
 
         for(int m=0; m<M; m++) {
             int v1 = sc.nextInt();
             int v2 = sc.nextInt();
 
-            adj[v1][v2]=true;
-            adj[v2][v1]=true;
-        } // end input
+            adjList[v1].add(v2);
+            adjList[v2].add(v1);
+        }
+
+        for(int i=1; i<=N; i++){ // 모든 정점들이 자기 친구 찾을 때 숫자 작은 친구부터 찾아야 하는데 입력순서는 보장되지 않음;;
+            Collections.sort(adjList[i]); // 모든 애들이 자기 친구 정보를 오름차순 정렬해서 유지하도록!
+        }
 
         visit = new boolean[N+1]; // 1~N번까지의 정점이 방문했는지 아닌지
         sb = new StringBuilder(); // 방문 할때마다 여기 기록해야지
@@ -48,8 +54,8 @@ public class Main_1260_인접행렬 {
             int now = queue.poll(); // 현재 방문처리하는 정점
             sb.append(now+" ");
 
-            for(int next=1; next<=N; next++){
-                if(adj[now][next] && !visit[next]){
+            for(int next: adjList[now]){
+                if(!visit[next]){
                     queue.add(next);
                     visit[next] = true;
                 }
@@ -57,12 +63,13 @@ public class Main_1260_인접행렬 {
         }
     }
 
+
     public static void dfs(int now){
         visit[now] = true; // now 칸 방문했다!!
         sb.append(now+" "); // 결과에 보여줄 방문처리 스트링 만들고!
 
-        for(int next=1; next<=N; next++) {
-            if(adj[now][next] && !visit[next]){ // 현재 정점에서 인접한 다른 정점이 있어? 그럼 일단 여기서 난 기다려!!
+        for(int next: adjList[now]){
+            if(!visit[next]){
                 dfs(next);
             }
         }

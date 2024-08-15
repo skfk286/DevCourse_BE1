@@ -1,6 +1,6 @@
-package learn.baekjoon.p1260;
+package learn.baekjoon;
 
-public class Solution {
+public class Main_1260_my {
 
     public static void main(String[] args) {
 //        4 5 1

@@ -1,4 +1,4 @@
-package learn.baekjoon.p4963;
+package learn.baekjoon.day_0809_탐색;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 /**
  * 섬의 개수
  */
-public class Main_4963_섬의개수 {
+public class Main_4963_섬의개수_my {
     public static final int[] di = {-1, -1, -1, 0, 1, 1,  1,  0};
     public static final int[] dj = {-1,  0,  1, 1, 1, 0, -1, -1};
 
