@@ -1,4 +1,4 @@
-package coding_tip;
+package learn._coding_tip;
 
 import java.util.Arrays;
 import java.util.Collections;
