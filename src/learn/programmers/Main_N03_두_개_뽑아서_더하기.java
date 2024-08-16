@@ -2,7 +2,7 @@ package learn.programmers;
 
 import java.util.*;
 
-public class Main_두_개_뽑아서_더하기 {
+public class Main_N03_두_개_뽑아서_더하기 {
 
     // 나의 문제풀이
     public static int[] solution(int[] numbers) {

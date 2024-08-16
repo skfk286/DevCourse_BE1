@@ -2,8 +2,8 @@ package learn.programmers;
 
 import java.util.*;
 
-public class Main_모의고사 {
-
+public class Main_N04_모의고사 {
+    // 나의 코드
 //    public static int[] solution(int[] answers) {
 //        int problemLength = answers.length;
 //        System.out.println("length : " + problemLength);
@@ -38,9 +38,22 @@ public class Main_모의고사 {
 //        }
 //
 //        return list.stream().mapToInt(Integer::intValue).toArray();
+
+//    }
+    
+//    public static int count(int[] answers, int[] supoja) {
+//        int count = 0;
+//
+//        for(int i=0;i<answers.length;i++) {
+//            if(answers[i] == supoja[i]) {
+//                count++;
+//            }
+//        }
+//
+//        return count;
 //    }
 
-    // 책
+    // 해답
     public static int[] solution(int[] answers) {
         int[][] pattern = {
                 {1,2,3,4,5},
@@ -68,18 +81,6 @@ public class Main_모의고사 {
         }
 
         return answer.stream().mapToInt(Integer::intValue).toArray();
-    }
-
-    public static int count(int[] answers, int[] supoja) {
-        int count = 0;
-
-        for(int i=0;i<answers.length;i++) {
-            if(answers[i] == supoja[i]) {
-                count++;
-            }
-        }
-
-        return count;
     }
 
     public static void main(String[] args) {
