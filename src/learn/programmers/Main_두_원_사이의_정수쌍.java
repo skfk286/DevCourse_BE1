@@ -1,6 +1,6 @@
 package learn.programmers;
 
-public class Main_두_원_사이의_정수쌍_my {
+public class Main_두_원_사이의_정수쌍 {
 
     public static long solution_solve_1(int r1, int r2) {
         long answer = 0;
