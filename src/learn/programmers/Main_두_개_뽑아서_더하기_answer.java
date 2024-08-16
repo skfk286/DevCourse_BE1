@@ -1,30 +1,19 @@
 package learn.programmers;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
 
-public class Main_두_개_뽑아서_더하기_my {
+public class Main_두_개_뽑아서_더하기_answer {
 
-    // 나의 문제풀이
     public static int[] solution(int[] numbers) {
-        int[] answer = {};
-
-        List<Integer> list = new ArrayList<>();
-
+        HashSet<Integer> set = new HashSet<>();
         for (int i = 0; i < numbers.length; i++) {
             for (int j = i + 1; j < numbers.length; j++) {
-
-                int add = numbers[i] + numbers[j];
-
-                if (!list.contains(add)) {
-                    list.add(add);
-                }
+                set.add(numbers[i] + numbers[j]);
             }
         }
 
-        answer = list.stream().sorted().
-                mapToInt(Integer::intValue).toArray();
-
-        return answer;
+        return set.stream().sorted().mapToInt(Integer::intValue).toArray();
     }
 
     public static void main(String[] args) {
